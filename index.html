@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>maaspacios – Proyectos, Construcción, Gestoría e Inmobiliaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crema: #f5f0e8;
+  --crema-2: #ede6d8;
+  --carbon: #181614;
+  --carbon-2: #221f1c;
+  --carbon-3: #2e2a26;
+  --oro: #b89a5a;
+  --oro-claro: #d4b87a;
+  --gris: #8a8680;
+  --gris-claro: #c8c4be;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--carbon);
+  color: var(--crema);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+a { color: inherit; }
+
+/* NAV */
+nav {
+position: fixed; top:0; left:0; right:0; z-index:100;
+display: flex; justify-content:space-between; align-items:center;
+padding: 1.4rem 6vw;
+background: rgba(24,22,20,.96);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid rgba(184,154,90,.18);
+}
+.nav-logo img { height:44px; width:auto; }
+.nav-links { display:flex; gap:2.8rem; list-style:none; }
+.nav-links a {
+font-family: ‘Montserrat’, sans-serif;
+font-size: .72rem; font-weight:500;
+letter-spacing: .22em; text-transform:uppercase;
+color: var(–gris-claro); text-decoration:none;
+transition: color .3s;
+position:relative; padding-bottom:.3rem;
+}
+.nav-links a::after {
+content:’’; position:absolute; bottom:0; left:0;
+width:0; height:1px; background:var(–oro); transition:width .3s;
+}
+.nav-links a:hover { color:var(–oro-claro); }
+.nav-links a:hover::after { width:100%; }
+
+/* HERO */
+.hero {
+min-height:100vh; position:relative;
+display:flex; align-items:flex-end;
+padding:0 6vw 12vh; overflow:hidden;
+}
+.hero-bg {
+position:absolute; inset:0;
+background-image: url(‘fotos/fachada-amplia.jpg’);
+background-size:cover; background-position:center 30%;
+}
+.hero-overlay {
+position:absolute; inset:0;
+background:
+linear-gradient(to right, rgba(24,22,20,.96) 38%, rgba(24,22,20,.35) 100%),
+linear-gradient(to top, rgba(24,22,20,.92) 0%, transparent 52%);
+}
+.hero-ornamento {
+position:absolute; top:0; left:0; right:0; height:3px;
+background: linear-gradient(90deg,transparent,var(–oro) 30%,var(–oro-claro) 50%,var(–oro) 70%,transparent);
+}
+.hero-content { position:relative; z-index:2; max-width:780px; }
+.hero-eyebrow {
+font-family:‘Montserrat’,sans-serif; font-size:.68rem; font-weight:500;
+letter-spacing:.35em; text-transform:uppercase; color:var(–oro);
+margin-bottom:1.6rem; opacity:0; animation:fadeUp .8s .2s forwards;
+display:flex; align-items:center; gap:1rem;
+}
+.hero-eyebrow::before { content:’’; display:block; width:32px; height:1px; background:var(–oro); }
+.hero-title {
+font-family:‘Cormorant Garamond’,serif;
+font-size:clamp(4.5rem,10vw,9.5rem);
+font-weight:300; line-height:.92;
+opacity:0; animation:fadeUp .8s .35s forwards;
+}
+.hero-title em { font-style:italic; color:var(–oro-claro); display:block; }
+.hero-rule { width:60px; height:1px; background:var(–oro); margin:2rem 0; opacity:0; animation:fadeUp .8s .5s forwards; }
+.hero-sub {
+font-size:.9rem; font-weight:300; line-height:1.85;
+color:var(–crema-2); max-width:460px;
+opacity:0; animation:fadeUp .8s .6s forwards;
+}
+.hero-cta { margin-top:3rem; display:flex; gap:1.4rem; flex-wrap:wrap; opacity:0; animation:fadeUp .8s .75s forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* BOTONES */
+.btn-oro {
+display:inline-flex; align-items:center; gap:.7rem; padding:.85rem 2.4rem;
+background:var(–oro); color:var(–carbon) !important;
+font-family:‘Montserrat’,sans-serif; font-size:.7rem; font-weight:600;
+letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
+transition:background .3s,transform .2s; border:none; cursor:pointer;
+}
+.btn-oro:hover { background:var(–oro-claro); transform:translateY(-2px); }
+.btn-outline {
+display:inline-flex; align-items:center; gap:.7rem; padding:.85rem 2.4rem;
+border:1px solid rgba(184,154,90,.5); color:var(–crema-2) !important;
+font-family:‘Montserrat’,sans-serif; font-size:.7rem; font-weight:500;
+letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
+transition:border-color .3s,color .3s;
+}
+.btn-outline:hover { border-color:var(–oro); color:var(–oro-claro) !important; }
+.btn-oro svg, .btn-outline svg { width:16px; height:16px; flex-shrink:0; }
+
+/* BANDA */
+.band {
+background:var(–carbon-2);
+border-top:1px solid rgba(184,154,90,.2);
+border-bottom:1px solid rgba(184,154,90,.2);
+overflow:hidden; padding:.9rem 0;
+}
+.band-inner { display:flex; gap:3.5rem; white-space:nowrap; animation:marquee 28s linear infinite; }
+.band-item {
+font-family:‘Montserrat’,sans-serif; font-size:.62rem; font-weight:500;
+letter-spacing:.28em; text-transform:uppercase; color:var(–gris); flex-shrink:0;
+display:flex; align-items:center; gap:1rem;
+}
+.band-item::before { content:‘◆’; font-size:.4rem; color:var(–oro); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SECCIONES */
+section { padding:8rem 6vw; }
+.label-seccion {
+font-family:‘Montserrat’,sans-serif; font-size:.62rem; font-weight:500;
+letter-spacing:.3em; text-transform:uppercase; color:var(–oro); margin-bottom:1.2rem;
+display:flex; align-items:center; gap:1rem;
+}
+.label-seccion::before { content:’’; display:block; width:24px; height:1px; background:var(–oro); }
+.titulo-seccion {
+font-family:‘Cormorant Garamond’,serif; font-weight:300;
+font-size:clamp(2.8rem,5vw,5rem); line-height:1; margin-bottom:1.6rem;
+}
+.texto-seccion { font-size:.88rem; font-weight:300; color:var(–gris-claro); max-width:520px; line-height:1.9; }
+
+/* SERVICIOS */
+#servicios { background:var(–carbon-2); }
+.servicios-grid {
+display:grid; grid-template-columns:repeat(3,1fr);
+gap:0; margin-top:4.5rem; border:1px solid rgba(184,154,90,.12);
+}
+@media(max-width:900px){.servicios-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.servicios-grid{grid-template-columns:1fr}}
+.servicio-card {
+background:var(–carbon); border:1px solid rgba(184,154,90,.1);
+overflow:hidden; transition:border-color .35s; position:relative;
+}
+.servicio-card:hover { border-color:rgba(184,154,90,.45); }
+.servicio-img {
+width:100%; height:210px; object-fit:cover; display:block;
+transition:transform .6s,filter .4s; filter:brightness(.65) saturate(.8);
+}
+.servicio-card:hover .servicio-img { transform:scale(1.04); filter:brightness(.85); }
+.servicio-body { padding:2.2rem; }
+.servicio-icon { width:28px; height:28px; margin-bottom:1.2rem; color:var(–oro); }
+.servicio-icon svg { width:100%; height:100%; }
+.servicio-card h3 {
+font-family:‘Cormorant Garamond’,serif; font-size:1.45rem; font-weight:400;
+color:var(–crema); margin-bottom:.7rem;
+}
+.servicio-card p { font-size:.82rem; font-weight:300; color:var(–gris); line-height:1.75; }
+.servicio-card::after {
+content:’’; position:absolute; bottom:0; left:0; width:0; height:2px;
+background:var(–oro); transition:width .4s;
+}
+.servicio-card:hover::after { width:100%; }
+
+/* GALERÍA */
+#proyectos { background:var(–carbon-3); }
+.galeria {
+display:grid; grid-template-columns:repeat(12,1fr);
+grid-auto-rows:270px; gap:3px; margin-top:4.5rem;
+}
+@media(max-width:768px){.galeria{grid-template-columns:1fr 1fr;grid-auto-rows:200px}}
+.gal-item { overflow:hidden; position:relative; cursor:pointer; }
+.gal-item img {
+width:100%; height:100%; object-fit:cover;
+transition:transform .7s,filter .5s; filter:brightness(.65) saturate(.7);
+}
+.gal-item:hover img { transform:scale(1.06); filter:brightness(.9) saturate(1); }
+.gal-tag {
+position:absolute; bottom:1.2rem; left:1.2rem;
+font-family:‘Montserrat’,sans-serif; font-size:.6rem; font-weight:500;
+letter-spacing:.22em; text-transform:uppercase; color:var(–crema-2);
+border:1px solid rgba(184,154,90,.5); padding:.35rem .9rem;
+opacity:0; transform:translateY(8px);
+transition:opacity .35s,transform .35s; backdrop-filter:blur(4px);
+}
+.gal-item:hover .gal-tag { opacity:1; transform:translateY(0); }
+.gal-a{grid-column:span 5;grid-row:span 2}
+.gal-b{grid-column:span 7}
+.gal-c{grid-column:span 4}
+.gal-d{grid-column:span 3}
+.gal-e{grid-column:span 4;grid-row:span 2}
+.gal-f{grid-column:span 8}
+@media(max-width:768px){
+.gal-a,.gal-b,.gal-c,.gal-d,.gal-e,.gal-f{grid-column:span 1;grid-row:span 1}
+}
+
+/* PROCESO */
+#proceso { background:var(–carbon-2); }
+.proceso-wrap { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+@media(max-width:768px){.proceso-wrap{grid-template-columns:1fr}}
+.proceso-foto { position:relative; top:2rem; }
+.proceso-foto img { width:100%; height:500px; object-fit:cover; filter:brightness(.8) saturate(.85); }
+.proceso-foto::before {
+content:’’; position:absolute; top:-16px; left:-16px;
+width:80px; height:80px;
+border-top:1px solid var(–oro); border-left:1px solid var(–oro); z-index:2;
+}
+.proceso-foto::after {
+content:’’; position:absolute; bottom:-16px; right:-16px;
+width:80px; height:80px;
+border-bottom:1px solid var(–oro); border-right:1px solid var(–oro);
+}
+.timeline { position:relative; padding-left:2.8rem; }
+.timeline::before {
+content:’’; position:absolute; left:.55rem; top:.6rem; bottom:.6rem;
+width:1px; background:linear-gradient(to bottom,var(–oro),rgba(184,154,90,.15));
+}
+.tl-paso { position:relative; padding-bottom:2.8rem; }
+.tl-paso:last-child { padding-bottom:0; }
+.tl-dot {
+position:absolute; left:-2.8rem; width:12px; height:12px;
+border:1px solid var(–oro); background:var(–carbon-2);
+border-radius:50%; top:.5rem; transition:background .3s;
+}
+.tl-paso:hover .tl-dot { background:var(–oro); }
+.tl-fase {
+font-family:‘Montserrat’,sans-serif; font-size:.58rem; font-weight:600;
+letter-spacing:.25em; text-transform:uppercase; color:var(–oro); margin-bottom:.5rem;
+}
+.tl-titulo {
+font-family:‘Cormorant Garamond’,serif; font-size:1.5rem; font-weight:400;
+color:var(–crema); margin-bottom:.6rem; line-height:1.1;
+}
+.tl-texto { font-size:.82rem; font-weight:300; color:var(–gris); line-height:1.8; }
+
+/* CONTACTO */
+#contacto { background:var(–carbon); }
+.contacto-wrap { display:grid; grid-template-columns:1fr 1fr; gap:6rem; margin-top:4.5rem; align-items:start; }
+@media(max-width:768px){.contacto-wrap{grid-template-columns:1fr}}
+.contacto-foto img { width:100%; height:460px; object-fit:cover; filter:brightness(.8) saturate(.8); }
+.c-dato { display:flex; align-items:flex-start; gap:1.4rem; padding:1.6rem 0; border-bottom:1px solid rgba(184,154,90,.1); }
+.c-dato:last-of-type { border-bottom:none; }
+.c-icon {
+width:40px; height:40px; border:1px solid rgba(184,154,90,.35);
+display:flex; align-items:center; justify-content:center;
+flex-shrink:0; color:var(–oro); transition:border-color .3s,background .3s;
+}
+.c-dato:hover .c-icon { border-color:var(–oro); background:rgba(184,154,90,.08); }
+.c-icon svg { width:16px; height:16px; }
+.c-info label {
+font-family:‘Montserrat’,sans-serif; font-size:.6rem; font-weight:500;
+letter-spacing:.22em; text-transform:uppercase; color:var(–oro);
+display:block; margin-bottom:.4rem;
+}
+.c-info span, .c-info a {
+font-size:.92rem; font-weight:300; color:var(–crema-2);
+text-decoration:none; transition:color .25s; line-height:1.6;
+}
+.c-info a:hover { color:var(–oro-claro); }
+
+/* FOOTER */
+footer {
+background:var(–carbon); padding:3.5rem 6vw;
+display:flex; justify-content:space-between; align-items:center;
+flex-wrap:wrap; gap:2rem; border-top:1px solid rgba(184,154,90,.15);
+}
+.footer-logo img { height:48px; width:auto; }
+.footer-centro { text-align:center; font-family:‘Montserrat’,sans-serif; font-size:.62rem; font-weight:400; letter-spacing:.12em; color:var(–gris); line-height:2; }
+.footer-centro span { color:var(–oro); }
+.footer-phone { font-family:‘Cormorant Garamond’,serif; font-size:1.8rem; font-weight:300; }
+.footer-phone a { color:var(–crema); text-decoration:none; transition:color .25s; }
+.footer-phone a:hover { color:var(–oro-claro); }
+
+/* WA */
+.wa-float {
+position:fixed; bottom:2rem; right:2rem; z-index:200;
+width:54px; height:54px; background:#1a1a1a;
+border:1px solid rgba(184,154,90,.4); border-radius:50%;
+display:flex; align-items:center; justify-content:center;
+text-decoration:none; transition:background .3s,border-color .3s,transform .25s;
+box-shadow:0 4px 24px rgba(0,0,0,.5);
+}
+.wa-float:hover { background:#25d366; border-color:#25d366; transform:scale(1.08); }
+.wa-float svg { width:22px; height:22px; fill:var(–oro); transition:fill .3s; }
+.wa-float:hover svg { fill:#fff; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .8s,transform .8s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><img src="fotos/logo.png" alt="maaspacios"></div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-ornamento"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">San José Iturbide, Guanajuato</p>
+    <h1 class="hero-title">Construimos<br><em>Tu Espacio.</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Proyectos integrales de construcción, gestoría, estructuras metálicas, interiorismo y bienes raíces. De la idea al acabado final, contigo en cada paso.</p>
+    <div class="hero-cta">
+      <a href="https://wa.me/524191002659" class="btn-oro">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.305-1.654A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.002-1.368l-.36-.214-3.733.979.996-3.648-.235-.374A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        WhatsApp
+      </a>
+      <a href="#servicios" class="btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+        Ver Servicios
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="band-inner">
+    <span class="band-item">Construcción Llave en Mano</span>
+    <span class="band-item">Estructuras Metálicas</span>
+    <span class="band-item">Cocinas Integrales</span>
+    <span class="band-item">Gestoría e Inmobiliaria</span>
+    <span class="band-item">Topografía</span>
+    <span class="band-item">Acabados de Lujo</span>
+    <span class="band-item">Cancelería de Aluminio</span>
+    <span class="band-item">Mantenimiento Industrial</span>
+    <span class="band-item">Construcción Llave en Mano</span>
+    <span class="band-item">Estructuras Metálicas</span>
+    <span class="band-item">Cocinas Integrales</span>
+    <span class="band-item">Gestoría e Inmobiliaria</span>
+    <span class="band-item">Topografía</span>
+    <span class="band-item">Acabados de Lujo</span>
+    <span class="band-item">Cancelería de Aluminio</span>
+    <span class="band-item">Mantenimiento Industrial</span>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="reveal">
+    <p class="label-seccion">Especialidades</p>
+    <h2 class="titulo-seccion">¿Qué Necesitas<br>Construir?</h2>
+    <p class="texto-seccion">Soluciones completas desde el primer trazo hasta el último tornillo. Cada proyecto recibe la misma exigencia, sin importar su envergadura.</p>
+  </div>
+  <div class="servicios-grid reveal" style="transition-delay:.15s">
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/render-exterior.jpg" alt="Llave en mano">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+        <h3>Llave en Mano</h3>
+        <p>Cimentación, albañilería, estructura, acabados y mobiliario. Tú descansas, nosotros construimos.</p>
+      </div>
+    </div>
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/edificio-noche.jpg" alt="Estructuras metálicas">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M7 7h10M7 11h6"/></svg></div>
+        <h3>Estructuras Metálicas</h3>
+        <p>Techados con multitecho y perfiles de acero para naves, bodegas y cubiertas industriales.</p>
+      </div>
+    </div>
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/escalera-interior.jpg" alt="Interiorismo">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 6h16v2H4zM2 4h20v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/></svg></div>
+        <h3>Interiorismo y Carpintería</h3>
+        <p>Clósets, muebles de bar y cocinas integrales fabricados a medida con carácter y precisión.</p>
+      </div>
+    </div>
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/fachada-cielo.jpg" alt="Acabados">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3>Acabados de Lujo</h3>
+        <p>Pisos cerámicos, muros decorativos y cancelería de aluminio o herrería de precisión.</p>
+      </div>
+    </div>
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/render-conjunto.jpg" alt="Topografía">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <h3>Topografía y Proyectos</h3>
+        <p>Levantamientos topográficos y diseño arquitectónico. La base técnica que cuida tu inversión.</p>
+      </div>
+    </div>
+    <div class="servicio-card">
+      <img class="servicio-img" src="fotos/fachada-amplia.jpg" alt="Gestoría">
+      <div class="servicio-body">
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h3>Gestoría e Inmobiliaria</h3>
+        <p>Trámites, permisos y asesoría en bienes raíces. Tu proyecto arranca sin demoras.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="reveal">
+    <p class="label-seccion">Galería</p>
+    <h2 class="titulo-seccion">Nuestros Proyectos</h2>
+    <p class="texto-seccion">Cada obra refleja nuestro compromiso con la calidad, el diseño y la durabilidad.</p>
+  </div>
+  <div class="galeria reveal" style="transition-delay:.12s">
+    <div class="gal-item gal-a"><img src="fotos/fachada-amplia.jpg" alt="Residencial"><span class="gal-tag">Residencial</span></div>
+    <div class="gal-item gal-b"><img src="fotos/edificio-noche.jpg" alt="Comercial"><span class="gal-tag">Comercial</span></div>
+    <div class="gal-item gal-c"><img src="fotos/render-exterior.jpg" alt="Render"><span class="gal-tag">Render 3D</span></div>
+    <div class="gal-item gal-d"><img src="fotos/fachada-cielo.jpg" alt="Fachada"><span class="gal-tag">Fachada</span></div>
+    <div class="gal-item gal-e"><img src="fotos/escalera-interior.jpg" alt="Interiorismo"><span class="gal-tag">Interiorismo</span></div>
+    <div class="gal-item gal-f"><img src="fotos/render-conjunto.jpg" alt="Conjunto"><span class="gal-tag">Conjunto</span></div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="proceso-wrap">
+    <div class="proceso-foto reveal">
+      <img src="fotos/fachada-cielo.jpg" alt="Construcción maaspacios">
+    </div>
+    <div class="reveal" style="transition-delay:.2s">
+      <p class="label-seccion">Metodología</p>
+      <h2 class="titulo-seccion">Del Concepto<br>a la Obra Terminada</h2>
+      <p class="texto-seccion" style="margin-bottom:3.5rem">Seguimos el ciclo completo de un proyecto arquitectónico: cada fase construye sobre la anterior con rigor técnico y comunicación constante.</p>
+      <div class="timeline">
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 01 — Anteproyecto</p>
+          <h4 class="tl-titulo">Levantamiento y Programa Arquitectónico</h4>
+          <p class="tl-texto">Visita al sitio, levantamiento topográfico y estudio de necesidades. Definimos el programa arquitectónico: áreas, usos, orientación y restricciones del terreno.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 02 — Diseño</p>
+          <h4 class="tl-titulo">Proyecto Ejecutivo y Renders</h4>
+          <p class="tl-texto">Elaboración de planos arquitectónicos, estructurales, hidráulicos y eléctricos. Renders fotorrealistas para visualizar el resultado antes de construir.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 03 — Gestión</p>
+          <h4 class="tl-titulo">Permisos, Licencias y Gestoría</h4>
+          <p class="tl-texto">Tramitación de licencia de construcción, dictámenes de uso de suelo y alineamiento. Nos encargamos de la burocracia para que la obra arranque a tiempo.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 04 — Construcción</p>
+          <h4 class="tl-titulo">Cimentación, Estructura y Albañilería</h4>
+          <p class="tl-texto">Ejecución de obra gruesa: trazo, cimentación, estructura de concreto o metálica, muros y losas. Supervisión técnica permanente en cada etapa.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 05 — Instalaciones</p>
+          <h4 class="tl-titulo">Hidráulica, Eléctrica y Especiales</h4>
+          <p class="tl-texto">Instalación de redes hidráulica-sanitaria, eléctrica, gas y telecomunicaciones. Coordinación de especialidades para evitar interferencias y garantizar seguridad.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 06 — Acabados e Interiorismo</p>
+          <h4 class="tl-titulo">Pisos, Cancelería, Carpintería y Pintura</h4>
+          <p class="tl-texto">Aplicación de acabados: aplanados, pisos cerámicos, cancelería de aluminio, herrería, carpintería de madera y pintura. El detalle que transforma la obra en tu hogar.</p>
+        </div>
+        <div class="tl-paso"><div class="tl-dot"></div>
+          <p class="tl-fase">Fase 07 — Entrega</p>
+          <h4 class="tl-titulo">Finiquito, Recorrido y Garantía</h4>
+          <p class="tl-texto">Recorrido de revisión con el cliente, correcciones finales y entrega de manuales de mantenimiento. Garantía de obra y soporte post-entrega incluidos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="reveal">
+    <p class="label-seccion">Contáctanos</p>
+    <h2 class="titulo-seccion">Hablemos de<br>Tu Proyecto</h2>
+    <p class="texto-seccion">Estamos en San José Iturbide, Guanajuato.</p>
+  </div>
+  <div class="contacto-wrap">
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="contacto-foto"><img src="fotos/render-exterior.jpg" alt="maaspacios"></div>
+    </div>
+    <div class="reveal" style="transition-delay:.22s">
+      <div class="c-dato">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="c-info"><label>Responsable</label><span>Miguel Ángel Aguilar Salazar</span></div>
+      </div>
+      <div class="c-dato">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.94 6.94l1.52-1.52a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="c-info"><label>Teléfono / WhatsApp</label><a href="tel:4191002659">419 100 2659</a></div>
+      </div>
+      <div class="c-dato">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="c-info"><label>Correo</label><a href="mailto:maaspacios@yahoo.com">maaspacios@yahoo.com</a></div>
+      </div>
+      <div class="c-dato">
+        <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="c-info"><label>Dirección</label><span>3a Privada del Tepetate No. 20<br>Col. El Tepetate II, C.P. 37984<br>San José Iturbide, Gto.</span></div>
+      </div>
+      <div style="margin-top:2.5rem">
+        <a href="https://wa.me/524191002659?text=Hola%2C%20me%20interesa%20una%20cotizaci%C3%B3n." class="btn-oro">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.305-1.654A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.002-1.368l-.36-.214-3.733.979.996-3.648-.235-.374A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Solicitar Cotización
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="fotos/logo.png" alt="maaspacios"></div>
+  <div class="footer-centro">
+    San José Iturbide, Gto. &nbsp;·&nbsp; C.P. 37984<br>
+    <span>maaspacios@yahoo.com</span>
+  </div>
+  <div class="footer-phone"><a href="tel:4191002659">419 100 2659</a></div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/524191002659" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.532 5.847L0 24l6.305-1.654A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.002-1.368l-.36-.214-3.733.979.996-3.648-.235-.374A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => io.observe(r));
+</script>
+
+</body>
+</html>
